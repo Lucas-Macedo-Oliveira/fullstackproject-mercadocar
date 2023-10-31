@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% extends 'main.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulário de contato</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/tickets.css' %}">
+</head>
+    <title>Pedidos de ajuda</title>
+</head>
+<body>
+    <h1>Pedidos de ajuda</h1>
+    <a href="/tickets_arquivados/">Pedidos arquivados</a>
+
+    <table class="table">
+      <thead>
+          <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Mensagem</th>
+              <th>Arquivar</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for contato in contatos %}
+          {% if not contato.arquivado %}
+
+          <tr>
+              <td>{{ contato.id }}</td>
+              <td>{{ contato.nome }}</td>
+              <td>{{ contato.email }}</td>
+              <td>{{ contato.mensagem }}</td>
+              <td>
+                <form action="{% url 'marcar_como_arquivado' contato.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Marcar como Arquivado">
+                  </form>
+                  
+            </td>
+            >
+            
+            
+          </tr>
+          {% endif %}
+
+          {% endfor %}
+      </tbody>
+  </table>
+</body>
+<html>
+{% endblock %}

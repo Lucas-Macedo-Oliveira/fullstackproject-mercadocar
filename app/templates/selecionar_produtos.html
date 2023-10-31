@@ -1,0 +1,162 @@
+{% extends 'main.html' %}
+
+
+
+
+{% block content %}
+  <h1>Selecione os produtos</h1>
+
+  <input id="searchbar" type="text" name="searchbar" placeholder="Nome do Produto" onkeyup="search()"></input>
+  <br><br>
+  <input id="searchbar1" type="text" name="searchbar1" placeholder="Marca" onkeyup="searchmarca()"></input>
+  <title>Filtro de preços</title>
+</head>
+<body>
+
+  <section class="container-fluid">
+    <div class="row justify-content-center">
+      {% for produto in produtos %}
+      <div class="card m-3" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{ produto.nome_produto }}</h5>
+          <p class="card-text-preco">R$ {{ produto.preco }}</p>
+          <p class="card-text-marca">Marca: {{ produto.marca }}</p>
+          <p class="card-text">Tipo: {{ produto.tipo }}</p>
+          <p class="card-text">Produto ID: {{ produto.produto_id }}</p>
+          <input type="number" name="quantidades" placeholder="Quantidade" min="1" value="1">
+          <input type="checkbox" name="produtos" value="{{ produto.id }}">
+          <label>Selecionar</label><br>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  
+  <div class="fixed-bottom bg-light p-2">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-6">
+          <h4>Carrinho</h4>
+          <ul id="carrinho">
+            <!-- Aqui serão listados os produtos adicionados -->
+          </ul>
+        </div>
+        <div class="col-6 text-right">
+          <h4>Total: R$ <span id="total">0</span></h4>
+          <button type="button" id="criar-pedido" class="btn btn-primary">Criar Pedido</button>
+
+          <a class="btn btn-dark" href="http://127.0.0.1:8000/dashboard/">Inicio</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const quantidades = document.querySelectorAll('input[name="quantidades"]');
+    const carrinho = document.getElementById('carrinho');
+    const totalElement = document.getElementById('total');
+    const criarPedidoBtn = document.getElementById('criar-pedido');
+
+    checkboxes.forEach((checkbox, index) => {
+      checkbox.addEventListener('change', () => {
+        if (checkbox.checked) {
+          const produto = checkboxes[index].dataset.produto;
+          const quantidade = quantidades[index].value;
+          const listItem = document.createElement('li');
+          listItem.textContent = `${produto} - Quantidade: ${quantidade}`;
+          carrinho.appendChild(listItem);
+          calcularTotal();
+        } else {
+          const listItem = checkboxes[index].parentNode.parentNode;
+          carrinho.removeChild(listItem);
+          calcularTotal();
+        }
+      });
+    });
+
+    function calcularTotal() {
+      let total = 0;
+      const itens = carrinho.getElementsByTagName('li');
+      for (let i = 0; i < itens.length; i++) {
+        const quantidade = parseInt(itens[i].textContent.split(' - Quantidade: ')[1]);
+        const preco = parseFloat(checkboxes[i].dataset.preco);
+        total += quantidade * preco;
+      }
+      totalElement.textContent = total.toFixed(2);
+    }
+
+    criarPedidoBtn.addEventListener('click', () => {
+      const selectedProdutos = [];
+      const selectedQuantidades = [];
+      checkboxes.forEach((checkbox, index) => {
+        if (checkbox.checked) {
+          selectedProdutos.push(checkbox.value);
+          selectedQuantidades.push(quantidades[index].value);
+        }
+      });
+
+      if (selectedProdutos.length > 0) {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '{% url "criar_pedido" %}';
+
+        const csrfToken = document.createElement('input');
+        csrfToken.type = 'hidden';
+        csrfToken.name = 'csrfmiddlewaretoken';
+        csrfToken.value = '{{ csrf_token }}';
+
+        form.appendChild(csrfToken);
+
+        selectedProdutos.forEach((produto, index) => {
+          const inputProduto = document.createElement('input');
+          inputProduto.type = 'hidden';
+          inputProduto.name = 'produtos';
+          inputProduto.value = produto;
+
+          const inputQuantidade = document.createElement('input');
+          inputQuantidade.type = 'hidden';
+          inputQuantidade.name = 'quantidades';
+          inputQuantidade.value = selectedQuantidades[index];
+
+          form.appendChild(inputProduto);
+          form.appendChild(inputQuantidade);
+        });
+
+        document.body.appendChild(form);
+        form.submit();
+      }
+    });
+
+    function search() {
+  let input = document.getElementById('searchbar').value;
+  input = input.toLowerCase();
+  let x = document.getElementsByClassName('card-title');
+
+  for (let i = 0; i < x.length; i++) {
+    if (x[i].textContent.toLowerCase().includes(input)) {
+      x[i].parentNode.parentNode.style.display = "block";
+    } else {
+      x[i].parentNode.parentNode.style.display = "none"; 
+    }
+  }
+}
+function searchmarca() {
+  let input = document.getElementById('searchbar1').value;
+  input = input.toLowerCase();
+  let x = document.getElementsByClassName('card-text-marca'); 
+
+  for (let i = 0; i < x.length; i++) {
+    if (x[i].textContent.toLowerCase().includes(input)) {
+      x[i].parentNode.parentNode.style.display = "block"; 
+    } else {
+      x[i].parentNode.parentNode.style.display = "none"; 
+  }}
+}
+
+    
+
+  </script>
+
+  
+{% endblock %}

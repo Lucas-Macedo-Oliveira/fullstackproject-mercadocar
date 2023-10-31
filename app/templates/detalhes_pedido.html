@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Visualizar Pedido</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f1f1f1;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .pedido-info {
+      margin-bottom: 20px;
+    }
+    .pedido-info label {
+      font-weight: bold;
+    }
+    .pedido-info span {
+      margin-left: 10px;
+    }
+    .botoes {
+      text-align: center;
+    }
+    .botoes a {
+      display: inline-block;
+      margin-right: 10px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .botoes a:last-child {
+      margin-right: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Detalhes do Pedido</h1>
+    <div class="pedido-info">
+      <label>Número do Pedido:</label>
+      <span>{{ pedido.id }}</span>
+    </div>
+    <div class="pedido-info">
+      <label>Data do Pedido:</label>
+      <span>{{ pedido.data }}</span>
+    </div>
+    <div class="pedido-info">
+      <label>Cliente:</label>
+      <span>{{ pedido.cliente.nome_completo }}</span>
+    </div>
+    <div class="pedido-info">
+      <label>Total:</label>
+      <span>{{ pedido.valor_total }}</span>
+    </div>
+    <div class="botoes">
+      <a href="/">Início</a>
+      <a href="/meus-pedidos/">Meus Pedidos</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% if perms.admin.can_change_produtos %}
+        <form name="form-users" id="formUsers" method="post" action="/store_produto/">
+            <div class="col-6 mt-4 m-auto">
+
+                {% if msg %}
+                    <div class="alert {{ class }}">
+                        {{ msg }}
+                    </div>
+                {% endif %}
+
+                {% csrf_token %}
+                <input class="form-control mt-4" type="text" name='nome_produto' id='nome_produto' placeholder="Nome Produto">
+                <input class="form-control mt-4" type="text" name='marca' id='marca' placeholder="Marca">
+                <input class="form-control mt-4" type="text" name='tipo' id='tipo' placeholder="Tipo">
+                <input class="form-control mt-4" type="number" name='preco' id='preco' placeholder="Preço">
+                <input class="form-control mt-4" type="number" name='produto_id' id='produto_id' placeholder="ID do Produto">
+                <input class="form-control mt-4" type="number" name='estoque' id='estoque' placeholder="Estoque">
+
+                <!--label for="imagem">Selecione uma imagem:</label>
+                <input type="file" id="imagem_produto" name="imagem_produto"!-->
+                <br>
+                <br>
+                <input class="btn btn-dark" type="submit" value="Cadastrar">
+                <a class="btn btn-dark" href="http://127.0.0.1:8000/dashboard/">Voltar</a>
+            </div>
+        </form>
+    {% else %}
+        <div>
+            <h1>É necessário estar com um usuário administrador</h1>
+            <br><br>
+            <a class="btn btn-dark" href="http://127.0.0.1:8000">Início</a>
+        </div>
+    {% endif %}
+        <script>
+          // Função para exibir mensagem de erro em um alerta
+          function showAlertErrorMessage(message) {
+            alert(message);
+        }
+
+        // Verificar se há mensagens de erro na URL e exibi-las em um alerta JavaScript
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+        if (error) {
+            showAlertErrorMessage(error);
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulário de contato</title>
+  <link rel="stylesheet" href="{% static 'css/contato.css' %}">
+</head>
+<body>
+  <section class="container">
+    <h2>Formulário de contato</h2>
+    <form action="{% url 'contato' %}" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,34 @@
+<!-- meus_pedidos.html -->
+{% extends 'main.html' %}
+
+{% block content %}
+<style>
+ body {
+ background-color: white;
+ color: #333;
+ font-family: Arial, sans-serif;
+ }
+ h1 {
+ color: blue;
+ }
+ ul {
+ list-style: none;
+ padding: 0;
+ margin: 0;
+ }
+ li {
+ background-color: #f4f4f4;
+ margin: 10px 0;
+ padding: 10px;
+ }
+</style>
+<h1>Meus Pedidos</h1>
+<ul>
+ {% for pedido in pedidos %}
+ <li>
+ Pedido #{{ pedido.pk }} - {{ pedido.data }}<br>
+ Total: R$ {{ pedido.get_total }}
+ </li>
+ {% endfor %}
+</ul>
+{% endblock %}

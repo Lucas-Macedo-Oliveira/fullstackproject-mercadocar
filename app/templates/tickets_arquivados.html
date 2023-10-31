@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% extends 'main.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  {% load static %}
+
+</head>
+    <title>Pedidos de ajuda</title>
+</head>
+<body>
+    <h1>Pedidos de ajuda</h1>
+
+    <table class="table">
+      <thead>
+          <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Mensagem</th>
+
+          </tr>
+      </thead>
+      <tbody>
+          {% for contato in contatos %}
+        
+
+          <tr>
+              <td>{{ contato.id }}</td>
+              <td>{{ contato.nome }}</td>
+              <td>{{ contato.email }}</td>
+              <td>{{ contato.mensagem }}</td>
+             
+            
+            
+            
+          </tr>
+      
+
+          {% endfor %}
+      </tbody>
+  </table>
+</body>
+<html>
+{% endblock %}

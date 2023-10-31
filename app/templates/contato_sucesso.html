@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulário de contato</title>
+  <link rel="stylesheet" href="{% static 'css/contato_sucesso.css' %}">
+
+</head>
+<body>
+  <section class="container">
+    <h2>Formulário de contato</h2>
+    <p>Sua mensagem foi enviada com sucesso!</p>
+    <p class="card">
+      ID do ticket de ajuda enviado: {{ contato.pk }}
+    </p>
+  </section>
+</body>
+</html>
+{% endblock %}

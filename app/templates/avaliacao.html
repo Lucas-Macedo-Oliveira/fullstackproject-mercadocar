@@ -1,0 +1,102 @@
+{% extends 'main.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/avaliacao.css' %}">
+
+  <title>Comentários</title>
+
+</head>
+<body>
+
+<center><h1>Avaliações</h1></center>
+
+<div class="new-comment">
+    <input type="text" placeholder="Escreva seu comentário...">
+    <button type="submit">Enviar</button>
+  </div>
+<br>
+<div class="card">
+  <div class="card-header">
+    <strong>Usuário 1</strong>
+  </div>
+  <div class="card-body">
+    <p class="card-title">Este produto é ótimo!</p>
+    <p class="card-text">Eu recomendo este produto para todos.</p>
+    <div class="card-rating">
+        <input type="radio" id="estrelinha1" name="estrelinha" value="estrelinha1" checked>
+		<label for="estrelinha1">★</label>
+		<input type="radio" id="estrelinha2" name="estrelinha" value="estrelinha2">
+		<label for="estrelinha2">★</label>
+		<input type="radio" id="estrelinha3" name="estrelinha" value="estrelinha3">
+		<label for="estrelinha3">★</label>
+		<input type="radio" id="estrelinha4" name="estrelinha" value="estrelinha4">
+		<label for="estrelinha4">★</label>
+		<input type="radio" id="estrelinha5" name="estrelinha" value="estrelinha5">
+		<label for="estrelinha5">★</label>
+    
+    
+
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<div class="card">
+  <div class="card-header">
+    <strong>Usuário 2</strong>
+  </div>
+  
+  <div class="card-body">
+    <p class="card-title">Não gostei muito deste produto.</p>
+    <p class="card-text">O produto não atende às minhas expectativas.</p>
+    <div class="card-rating">
+    <input type="radio" id="estrelinha1" name="estrelinha" value="estrelinha1" checked>
+		<label for="estrelinha1">★</label>
+		<input type="radio" id="estrelinha2" name="estrelinha" value="estrelinha2">
+		<label for="estrelinha2">★</label>
+		<input type="radio" id="estrelinha3" name="estrelinha" value="estrelinha3">
+		<label for="estrelinha3">★</label>
+		<input type="radio" id="estrelinha4" name="estrelinha" value="estrelinha4">
+		<label for="estrelinha4">★</label>
+		<input type="radio" id="estrelinha5" name="estrelinha" value="estrelinha5">
+		<label for="estrelinha5">★</label>
+
+    </div>
+  </div>
+</div>
+
+<br>
+<div class="card">
+  <div class="card-header">
+    <strong>Usuário 2</strong>
+  </div>
+  <div class="card-body">
+    <p class="card-title">Não gostei muito deste produto.</p>
+    <p class="card-text">O produto não atende às minhas expectativas.</p>
+    <div class="card-rating">
+        <input type="radio" id="estrelinha1" name="estrelinha" value="estrelinha1" checked>
+		<label for="estrelinha1">★</label>
+		<input type="radio" id="estrelinha2" name="estrelinha" value="estrelinha2">
+		<label for="estrelinha2">★</label>
+		<input type="radio" id="estrelinha3" name="estrelinha" value="estrelinha3">
+		<label for="estrelinha3">★</label>
+		<input type="radio" id="estrelinha4" name="estrelinha" value="estrelinha4">
+		<label for="estrelinha4">★</label>
+		<input type="radio" id="estrelinha5" name="estrelinha" value="estrelinha5">
+		<label for="estrelinha5">★</label>
+
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
+
+  
+  {% endblock %}

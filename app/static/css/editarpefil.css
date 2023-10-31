@@ -1,0 +1,37 @@
+
+    .my-form {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #ffffff;
+    }
+
+    .my-form h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .my-form input[type="text"],
+    .my-form input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    .my-form button[type="submit"] {
+        background-color: #0004ff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    .my-form button[type="submit"]:hover {
+        background-color: #0004ff;
+    }
+

@@ -1,0 +1,41 @@
+*{
+    margin: 0px;
+}
+
+body{
+    position: relative;
+}
+
+.navbar-text{
+    position: absolute;
+    right: 1%;
+}
+
+.navbar-brand{
+    color: rgb(5, 5, 127);
+    font-weight: 600;
+    font-size: 30px;
+}
+
+.navbar-text{
+    font-weight: 600;
+}
+
+.container-fluid{
+    height: 100px;
+}
+
+#img{
+    width: 100%;
+    opacity: 5%;
+}
+
+/* CSS padrão */
+
+body {
+    font-family: sans-serif;
+}
+
+/* CSS para a tela tickets.html */
+
+@import url("tickets.css");

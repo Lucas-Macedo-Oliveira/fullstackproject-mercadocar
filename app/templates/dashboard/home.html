@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+       
+        
+        <section class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="banner">
+                  <h2>Conheça nossos produtos</h2>
+                    <a href="http://127.0.0.1:8000/selecionar-produtos/">
+                        <img src="https://static.wixstatic.com/media/0816cc_ce8eae0c781c4a00a025bfb2a2b7f041~mv2.jpg/v1/fill/w_1864,h_438,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/0816cc_ce8eae0c781c4a00a025bfb2a2b7f041~mv2.jpg" alt="Banner de produtos">
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    {% else %} 
+        <h1>É necessário fazer login para acessar esta página</h1>
+        <br><br>
+        <a class="btn btn-dark" href="http://127.0.0.1:8000">Início</a>
+        <a class="btn btn-dark" href="http://127.0.0.1:8000/painel/">Entrar agora</a>
+        <hr>
+    {% endif %}
+    
+{% endblock %}

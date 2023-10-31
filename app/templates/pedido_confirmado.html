@@ -1,0 +1,9 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <h1>Pedido Confirmado</h1>
+    <p>O seu pedido foi criado com sucesso.</p>
+    <p>Número do pedido: {{ pedido.pk }}</p>
+    <p>Total: R$ {{ total }}</p>
+    <a href="{% url 'visualizar_pedido' pedido.pk %}">Visualizar Pedido</a>
+{% endblock %}

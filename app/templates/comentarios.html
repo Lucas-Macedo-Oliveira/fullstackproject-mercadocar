@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Comentários</title>
+
+    <link rel="stylesheet" href="{% static 'css/comentarios.css' %}">
+</head>
+<body>
+
+    {% include "main.html" %}
+
+    {% block content %}
+    <div class="container">
+        <h1>Último Comentário</h1>
+
+        {% if comentarios %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ comentarios.last.usuario.username }} em {{ comentarios.last.data }}</h5>
+                    <p class="card-text">{{ comentarios.last.mensagem }}</p>
+                </div>
+            </div>
+            {% else %}
+                <p>Nenhum comentário disponível.</p>
+            {% endif %}
+
+            <div class="mt-5">
+                <h2>Todos os Comentários</h2>
+
+                <div class="comentarios-container">
+                    {% for comentario in comentarios|slice:":4" %}
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ comentario.usuario.username }} em {{ comentario.data_formatada }}</h5>
+                                <p class="card-text">{{ comentario.mensagem }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <button type="button" class="btn btn-primary" id="expandir-comentarios">Expandir todos os comentários</button>
+
+                <button type="button" class="btn btn-secondary" id="voltar-comentarios" style="display:none">Voltar</button>
+            </div>
+
+            <div class="mt-5">
+                <h2>Envie seu feedback</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Enviar Comentário</button>
+                </form>
+            </div>
+        </div>
+    {% endblock %}
+
+    <script>
+    var comentariosContainer = document.querySelector('.comentarios-container');
+    var expandirButton = document.getElementById('expandir-comentarios');
+    var voltarButton = document.getElementById('voltar-comentarios');
+
+    expandirButton.addEventListener('click', function() {
+        comentariosContainer.innerHTML = '';
+        {% for comentario in comentarios|slice:"4:" %}
+            var card = document.createElement('div');
+            card.classList.add('card', 'mb-3');
+
+            var cardBody = document.createElement('div');
+            cardBody.classList.add('card-body');
+
+            var title = document.createElement('h5');
+            title.classList.add('card-title');
+            title.textContent = "{{ comentario.usuario.username }} em {{ comentario.data_formatada }}";
+
+            var text = document.createElement('p');
+            text.classList.add('card-text');
+            text.textContent = "{{ comentario.mensagem }}";
+
+            cardBody.appendChild(title);
+            cardBody.appendChild(text);
+            card.appendChild(cardBody);
+
+            comentariosContainer.appendChild(card);
+        {% endfor %}
+        
+        expandirButton.style.display = 'none';
+        voltarButton.style.display = 'block';
+    });
+
+    voltarButton.addEventListener('click', function() {
+        comentariosContainer.innerHTML = '';
+        {% for comentario in comentarios|slice:":4" %}
+            var card = document.createElement('div');
+            card.classList.add('card', 'mb-3');
+
+            var cardBody = document.createElement('div');
+            cardBody.classList.add('card-body');
+
+            var title = document.createElement('h5');
+            title.classList.add('card-title');
+            title.textContent = "{{ comentario.usuario.username }} em {{ comentario.data_formatada }}";
+
+            var text = document.createElement('p');
+            text.classList.add('card-text');
+            text.textContent = "{{ comentario.mensagem }}";
+
+            cardBody.appendChild(title);
+            cardBody.appendChild(text);
+            card.appendChild(cardBody);
+
+            comentariosContainer.appendChild(card);
+        {% endfor %}
+        
+        expandirButton.style.display = 'block';
+        voltarButton.style.display = 'none';
+    });
+    </script>
+
+</body>
+</html>
+

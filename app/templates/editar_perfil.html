@@ -1,0 +1,98 @@
+
+
+{% extends 'main.html' %}
+
+{% block content %}
+
+    <style>
+    .my-form {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #ffffff;
+    }
+
+    .my-form h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .my-form input[type="text"],
+    .my-form input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    .my-form button[type="submit"] {
+        background-color: #0004ff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    .my-form button[type="submit"]:hover {
+        background-color: #0004ff;
+    }
+    </style>
+
+    <h1>Editando Perfil</h1>
+    <form method="POST" class="my-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Salvar</button>
+        <a class="btn background-color: #0004ff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;" href="/dashboard/">Voltar</a>
+    </form>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function() {
+  $('#id_username').blur(function() {
+    var username = $(this).val();
+    $.ajax({
+      url: '/verificar_username/',
+      data: {
+        'username': username
+      },
+      dataType: 'json',
+      success: function(data) {
+        if (data.exists) {
+          alert('O username já está em uso. Por favor, escolha outro.');
+        }
+      }
+    });
+  });
+
+  $('#id_email').blur(function() {
+    var email = $(this).val();
+    $.ajax({
+      url: '/verificar_email/',
+      data: {
+        'email': email
+      },
+      dataType: 'json',
+      success: function(data) {
+        if (data.exists) {
+          alert('O email já está em uso. Por favor, escolha outro.');
+        }
+      }
+    });
+  });
+});
+</script>
+{% endblock %}
