@@ -1,0 +1,20 @@
+<!-- Página de Confirmação (delete_account.html) -->
+{% extends 'main.html' %}
+
+{% block content %}
+  <h1>Confirmação de Exclusão de Conta</h1>
+  <p>Para confirmar a exclusão da sua conta, por favor, digite sua senha.</p>
+  <form method="post" action="{% url 'delete_account' %}" id="deleteAccountForm">
+    {% csrf_token %}
+    <label for="password">Senha:</label>
+    <input type="password" name="password" required>
+    <button type="submit">Confirmar Exclusão</button>
+  </form>
+
+  <!-- Adicionando script para exibir pop-up -->
+  <script>
+    {% if error_message %}
+      alert("{{ error_message }}");
+    {% endif %}
+  </script>
+{% endblock %}

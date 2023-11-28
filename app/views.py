@@ -378,3 +378,42 @@ def comentarios(request):
 
     return render(request, 'comentarios.html', {'form': form, 'comentarios': comentarios})
     
+from django.shortcuts import render, redirect
+from django.views import View
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.contrib.auth import logout, authenticate
+from django.contrib import messages
+
+@method_decorator(login_required, name='dispatch')
+class DeleteAccountView(View):
+    template_name = 'delete_account.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+    def post(self, request):
+        # Verifique se a senha fornecida está correta
+        password = request.POST.get('password')
+        user = authenticate(username=request.user.username, password=password)
+
+        if user is not None:
+            # Senha correta, proceda com a exclusão
+            user.delete()
+            logout(request)
+            messages.success(request, 'Sua conta foi excluída com sucesso. Agradecemos por utilizar nossos serviços.')
+            return redirect('exlucsao_concluida.html')
+        else:
+            # Senha incorreta, exiba uma mensagem de erro
+            messages.error(request, 'Senha incorreta. Tente novamente.')
+            return redirect('delete_account')
+
+
+from django.shortcuts import render
+
+class exlucsao_concluida(View):
+    template_name = 'exlucsao_concluida.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+

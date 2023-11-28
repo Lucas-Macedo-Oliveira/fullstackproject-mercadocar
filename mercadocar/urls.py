@@ -6,7 +6,7 @@ from app.views import (
     contato, home, create, store, painel, loginuser, dashboard, login, create_produto,
     store_produto, PerfilUpdate, comprar, selecionar_produtos, criar_pedido,
     detalhes_pedido, pedido_confirmado, visualizar_pedido, editar_produto,
-    verificar_username, verificar_email, verificar_produto_id, visualizar_pedido, meus_pedidos, logout, tickets, marcar_como_arquivado, tickets_arquivados, avaliacao, comentarios, ComentarioForm
+    verificar_username, verificar_email, verificar_produto_id, visualizar_pedido, meus_pedidos, logout, tickets, marcar_como_arquivado, tickets_arquivados, avaliacao, comentarios, ComentarioForm, DeleteAccountView, exlucsao_concluida
 )
 
 urlpatterns = [
@@ -39,6 +39,9 @@ urlpatterns = [
     path('tickets_arquivados/', tickets_arquivados, name='tickets_arquivados'),
     path('avaliacao/', avaliacao, name='avaliacao'),
     path('comentarios/', comentarios, name='comentarios'),
+    path('delete_account/', DeleteAccountView.as_view(), name='delete_account'),
+    path('exlucsao_concluida.html/', exlucsao_concluida.as_view(), name='exlucsao_concluida.html'),
+
     
 
 
