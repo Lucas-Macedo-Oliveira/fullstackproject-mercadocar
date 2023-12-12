@@ -1,9 +1,1 @@
-Amanda Albino da Silva - RA: 2102418
-
-Camille Cristine Oliveira de Souza – RA: 2102128
-
-Lucas Eduardo da Silva Ramos – RA: 2102515
-
-Lucas Macedo de Oliveira – RA: 2102692
-
-Matheus Gama Faustino – RA: 2102081
+Um projeto de e-commerce foi criado em Python com o framework Django. O projeto permite que usuários se cadastrem e façam login, que administradores criem produtos, editem usuários e produtos, e que os usuários façam compras. Os dados do projeto estão armazenados em um banco de dados MySQL, baseado em resolver um problema real da empresa MercadoCar.
